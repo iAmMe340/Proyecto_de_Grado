@@ -1,0 +1,1 @@
+web: gunicorn Poteciador_semantico.wsgi --log-file -

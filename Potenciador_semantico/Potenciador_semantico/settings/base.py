@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from os import *
 
@@ -23,22 +23,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-y(+bwodq3=+$wfbqi13yb_jq978(f0a1&p3t*_f$^k0_v0si&v'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
+#LOGIN_REDIRECT_URL = "/mt/" #por completar
+#LOGOUT_REDIRECT_URL = "/account/logout/"
 
 # Application definition
 
 INSTALLED_APPS = [
+     
+    'DataConnection.apps.DataconnectionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dataconnection.apps.DataConnectionConfig',
+   
 ]
 
 MIDDLEWARE = [
@@ -74,13 +73,6 @@ WSGI_APPLICATION = 'Potenciador_semantico.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -120,6 +112,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES = (BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(STATIC_URL, 'static')
+os.makedirs(STATIC_ROOT, exist_ok=True)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(MEDIA_URL, '/media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
